@@ -17,7 +17,11 @@ public class CubeClicker : MonoBehaviour
                     Explosion explosion = hit.collider.gameObject.GetComponent<Explosion>();
                     explosion.Explode();
                 }
-
+                else if (hit.collider.gameObject.GetComponent<ExplosionV2>())
+                {
+                    ExplosionV2 explosionV2 = hit.collider.gameObject.GetComponent<ExplosionV2>();
+                    explosionV2.Explode();
+                }
             }
         }
     }
