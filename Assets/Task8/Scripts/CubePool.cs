@@ -25,6 +25,7 @@ public class CubePool : MonoBehaviour
             CreateNewPooledObject();
         }     
     }
+
     private void InitializePool()
     {
         for (int i = 0; i < _poolSize; i++)

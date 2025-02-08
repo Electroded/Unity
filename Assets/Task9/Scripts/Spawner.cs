@@ -1,24 +1,33 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Spawner : MonoBehaviour
 {
-    private Transform[] _spawnPoints;
-
-    private bool _canSpawn;
-
-    private float _spawnTimer;
+    [SerializeField] private Transform[] _spawnPoints;
+    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private float _spawnInterval;
 
     private void Start()
     {
-        for(int i = 0; i < _spawnPoints.Length; i++)
+        StartCoroutine(SpawnEnemies());
+    }
+
+    private IEnumerator SpawnEnemies()
+    {
+        while (true)
         {
-            _spawnPoints = gameObject.GetComponentsInChildren<Transform>();
+            SpawnEnemy();
+            yield return new WaitForSeconds(_spawnInterval);
         }
     }
 
-    private IEnumerator SpawnEnemy()
-    {
-        yield return new WaitForSeconds(1);
+    private void SpawnEnemy()
+    { 
+        int randomIndex = Random.Range(0, _spawnPoints.Length);
+
+        Transform spawnPoint = _spawnPoints[randomIndex];
+
+        GameObject newEnemy = Instantiate(_enemyPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 }
