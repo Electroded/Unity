@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Pool;
 
 [RequireComponent (typeof(ColorChanger))]
 public class CubeDestroyer : MonoBehaviour
@@ -8,20 +10,25 @@ public class CubeDestroyer : MonoBehaviour
     [SerializeField] private float _destroyTimerMax;
     [SerializeField] private Renderer _renderer;
 
-    private CubePool _cubePool;
+    private UnityCubePool _unityCubePool;
     private ColorChanger _colorChanger;
+
+    private bool _delayStarted;
+
+    public ObjectPool<GameObject> Pool;
 
     private void Start()
     {
-        _cubePool = GameObject.FindGameObjectWithTag("CubePool").GetComponent<CubePool>();
+        _unityCubePool = GameObject.FindGameObjectWithTag("UnityCubePool").GetComponent<UnityCubePool>();
         _colorChanger = GetComponent<ColorChanger>();
+        print(_unityCubePool.name);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == _targetLayer)
+        if (collision.gameObject.layer == _targetLayer && !_delayStarted)
         {
-            DestroyWithDelay();
+            StartCoroutine(ReleaseDelay());
 
             if (!_colorChanger._isColorChanged)
             {
@@ -30,17 +37,19 @@ public class CubeDestroyer : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private IEnumerator ReleaseDelay()
     {
-        if (_cubePool != null)
-        {
-            _cubePool.DeletePoolObject(gameObject);
-        }
-    }
+        print("Oi");
+        _delayStarted = true;
 
-    private void DestroyWithDelay()
-    {
         float destroyTimer = Random.Range(_destroyTimerMin, _destroyTimerMax);
-        Destroy(gameObject, destroyTimer);
+        
+        yield return new WaitForSeconds(destroyTimer);
+
+        if (_unityCubePool != null)
+        {
+            //_unityCubePool.OnReturnedToPool(gameObject);
+            Pool.Release(gameObject);
+        }
     }
 }
