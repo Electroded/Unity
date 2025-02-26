@@ -297,7 +297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8eefacfb5deca540a06a8edf90a5e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxStrength: 10
   _recoveryRate: 0.3
   _audioSource: {fileID: 70108030}
 --- !u!23 &70108028
@@ -552,7 +551,7 @@ GameObject:
   - component: {fileID: 1257946351}
   - component: {fileID: 1257946350}
   m_Layer: 6
-  m_Name: Cylinder
+  m_Name: Intruder
   m_TagString: Cube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
