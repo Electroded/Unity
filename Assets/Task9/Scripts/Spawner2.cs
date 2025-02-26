@@ -33,10 +33,10 @@ public class Spawner2 : MonoBehaviour
 
         GameObject newEnemy = Instantiate(_enemyPrefab, spawnPoint.position, spawnPoint.rotation);
 
-        EnemyMover9_2 enemyMover9_2 = newEnemy.GetComponent<EnemyMover9_2>();
+        Mover9_2 enemyMover9_2 = newEnemy.GetComponent<Mover9_2>();
 
         EnemyTarget enemyTarget = spawnPoint.GetComponent<EnemyTarget>();
 
-        enemyMover9_2._targetTransform = enemyTarget.targetTransform;
+        //Mover9_2.SetTargetTransform(enemyTarget.transform);
     }
 }
