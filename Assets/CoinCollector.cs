@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CoinCollector : MonoBehaviour
 {
-    private int _coins;
+    private int _currentCoins;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,8 +16,8 @@ public class CoinCollector : MonoBehaviour
 
     private void AddCoin()
     {
-        _coins ++;
+        _currentCoins++;
         
-        print(_coins);
+        print(_currentCoins);
     }
 }
