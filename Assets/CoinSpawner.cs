@@ -13,7 +13,6 @@ public class CoinSpawner : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SpawnCoins());
-
     }
 
     private IEnumerator SpawnCoins()
