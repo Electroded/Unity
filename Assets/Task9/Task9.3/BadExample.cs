@@ -3,7 +3,7 @@ using UnityEngine;
 public class GoPlaces : MonoBehaviour
 {
     private int _arrayIndex;
-    private float _float;
+    private float _maxDistance;
     private Transform _placePoint;
     private Transform[] _places;
 
@@ -21,7 +21,7 @@ public class GoPlaces : MonoBehaviour
     {
         var _pointNumber = _places[_arrayIndex];
 
-        transform.position = Vector3.MoveTowards(transform.position, _pointNumber.position, _float * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _pointNumber.position, _maxDistance * Time.deltaTime);
 
         if (transform.position == _pointNumber.position)
         {
