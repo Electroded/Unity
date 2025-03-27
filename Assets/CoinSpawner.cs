@@ -28,6 +28,7 @@ public class CoinSpawner : MonoBehaviour
     private void SpawnCoin()
     {
         Vector2 spawnPosition = new Vector2(Random.Range(_spawnAreaMin.x, _spawnAreaMax.x),Random.Range(_spawnAreaMin.y, _spawnAreaMax.y));
+        
         Instantiate(_coinPrefab, spawnPosition, Quaternion.identity);
     }
 }
