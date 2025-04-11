@@ -30,7 +30,7 @@ public class Patrol : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (movingRight)
         {
