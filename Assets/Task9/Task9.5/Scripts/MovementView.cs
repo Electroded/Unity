@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MovementView : MonoBehaviour
 {
+    private const string Speed = "Speed";
+
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
 
@@ -17,7 +19,7 @@ public class MovementView : MonoBehaviour
 
     public void SetSpeed(float horizontalInput)
     {
-        _animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
+        _animator.SetFloat(Speed, Mathf.Abs(horizontalInput));
     }
 
     public void FlipX(float horizontalInput)
