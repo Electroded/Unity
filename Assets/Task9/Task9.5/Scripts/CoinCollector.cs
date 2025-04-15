@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class CoinCollector : MonoBehaviour
 {
-    [SerializeField] private int _coinLayer;
+    [SerializeField] private LayerMask _coinLayerMask;
 
     private int _currentCoins;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == _coinLayer)
+        if (((1 << collision.gameObject.layer) & _coinLayerMask) != 0)
         {
             AddCoin();
 
