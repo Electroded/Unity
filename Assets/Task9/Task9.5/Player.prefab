@@ -92,6 +92,37 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4294717860891064547}
   m_Enabled: 1
+--- !u!1 &5327087105498454091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 523783865180235011}
+  m_Layer: 7
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &523783865180235011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5327087105498454091}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.5, y: 0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8961955162192861255}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6278083310354847862
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,6 +139,7 @@ GameObject:
   - component: {fileID: 3697745493401694743}
   - component: {fileID: 1422350082226280762}
   - component: {fileID: 2201499363274917645}
+  - component: {fileID: 86278649774337440}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -129,6 +161,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2951628226965755975}
+  - {fileID: 523783865180235011}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1860292317233163429
@@ -278,9 +311,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45ff205638dccf84ca631f35a090777f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinLayer:
+  _coinLayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
 --- !u!114 &1422350082226280762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,3 +346,19 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &86278649774337440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6278083310354847862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15f166dc3804a894db25369b25861a00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 0
+  _healthPackLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
