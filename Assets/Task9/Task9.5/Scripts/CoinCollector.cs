@@ -20,6 +20,6 @@ public class CoinCollector : MonoBehaviour
     {
         _currentCoins++;
         
-        print(_currentCoins);
+        print("Current Coins: " + _currentCoins);
     }
 }

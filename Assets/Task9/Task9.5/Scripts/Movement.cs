@@ -17,10 +17,13 @@ public abstract class Movement : MonoBehaviour
     protected float _horizontalInput;
     protected Rigidbody2D _rb;
     protected MovementView _movementView;
+    protected Attack _attack;
 
     protected virtual void Start()
     {
         _movementView = GetComponent<MovementView>();
+
+        _attack = GetComponent<Attack>();
 
         _rb = GetComponent<Rigidbody2D>();
     }
