@@ -1,74 +1,74 @@
 using UnityEngine;
 
-public class NpcMovement : Movement
+public class NpcMovement : MonoBehaviour
 {
-    [SerializeField] protected Transform _wallCheck;
-    [SerializeField] protected LayerMask _playerLayer;
-    [SerializeField] protected float _wallCheckDistance;
-    [SerializeField] protected float _playerCheckRadius;
-    [SerializeField] protected float _playerAttackRadius;
-    [SerializeField] protected NpcAttack _npcAttack;
+    [SerializeField] private Transform _groundCheck;
     [SerializeField] private Transform _player;
+    [SerializeField] private NpcRoot _npcRoot;
+    [SerializeField] private NpcAttack _npcAttack;
+    [SerializeField] private LayerMask _playerLayer;
+    [SerializeField] private LayerMask _groundLayer;
 
-    protected float _distanceToPlayer;
-    protected int _direction = 1;
+    [SerializeField] private float _wallCheckDistance;
+    [SerializeField] private float _playerChaseRadius;
+    [SerializeField] private float _playerAttackRadius;
+    [SerializeField] private float _groundCheckRadius;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private Transform _patrolPointA;
+    [SerializeField] private Transform _patrolPointB;
 
-    protected override void FixedUpdate()
+    private bool _isGrounded;
+    private float _distanceToPlayer;
+    private Vector3 _patrolTarget;
+
+    private void Start()
     {
-        PlayerCheck();
-        GroundCheck();
+        _patrolTarget = _patrolPointB.position;
     }
 
-    private void PlayerCheck()
+    private void Update()
     {
-        _distanceToPlayer = Vector2.Distance(_player.position, gameObject.transform.position);
-        
-        print(_distanceToPlayer);
+        GroundCheck();
 
-        if (_distanceToPlayer > _playerCheckRadius)
-        {
-            Move();
-        }
+        _distanceToPlayer = _npcRoot.GetDistanceToTarget();
 
-        else if (_distanceToPlayer > _playerAttackRadius)
+        if (_isGrounded)
         {
-            Chase();
+            if (_distanceToPlayer > _playerChaseRadius)
+            {
+                Patrol();
+            }
+            else
+            {
+                Chase();
+            }
         }
-        else if (_distanceToPlayer < _playerAttackRadius)
+    }
+
+    private void Patrol()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, _patrolTarget, _moveSpeed * Time.deltaTime);
+
+        if (Vector2.Distance(transform.position, _patrolTarget) < 0.1f)
         {
-            _npcAttack.PerformAttack();
+            if (_patrolTarget == _patrolPointA.transform.position)
+            {
+                _patrolTarget = _patrolPointB.transform.position;
+            }
+            else
+            {
+                _patrolTarget = _patrolPointA.position;
+            }
         }
+    }
+
+    private void GroundCheck()
+    {
+        _isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayer);
     }
 
     private void Chase()
     {
-        Vector3 target = _player.position;
-
-        float xPosition = Mathf.MoveTowards(_rb.position.x, target.x, _moveSpeed * Time.fixedDeltaTime);
-
-        Vector2 newPosition = new Vector2(xPosition, _rb.position.y);
-
-        _rb.MovePosition(newPosition);
-
-        Flip(newPosition.x);
-
-    }
-
-    protected override void Move()
-    {
-        Vector2 raycastDirection = _direction == 1 ? Vector2.right : Vector2.left;
-
-        RaycastHit2D wallInfo = Physics2D.Raycast(_wallCheck.position, raycastDirection, _wallCheckDistance, _groundLayer);
-
-        if (_isGrounded && wallInfo)
-        {
-            _direction *= -1;
-
-            Flip(_direction);
-        }
-
-        _rb.velocity = new Vector2(_direction * _moveSpeed, _rb.velocity.y);
-
-        UpdateAnimator(_direction);
+        transform.position = Vector2.MoveTowards(transform.position, _player.position, _moveSpeed * Time.deltaTime);
     }
 }
