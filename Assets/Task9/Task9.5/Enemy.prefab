@@ -14,7 +14,9 @@ GameObject:
   - component: {fileID: 752441312605410990}
   - component: {fileID: 5409899717135055419}
   - component: {fileID: 4434861181799674438}
-  m_Layer: 0
+  - component: {fileID: 1825783635699257021}
+  - component: {fileID: 9114786504624018981}
+  m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +112,7 @@ Animator:
   m_GameObject: {fileID: 1143461771292070178}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: b810f2280bb2a6b4cbf996716e6e3d55, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -185,6 +187,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7069d5e058f7b1428d4e0d4a49e3a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 752441312605410990}
+  _spriteRenderer: {fileID: 5409899717135055419}
+--- !u!114 &1825783635699257021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143461771292070178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3e90c2a26b23c94d891d232e78dcaf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 0}
+--- !u!114 &9114786504624018981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143461771292070178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df5a486c9ed548b45bc67adae7b404b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  _wallCheck: {fileID: 3632314316630338763}
+  _groundCheck: {fileID: 520996541167397248}
+  _rb: {fileID: 279568848561885777}
+  _npcRoot: {fileID: 0}
+  _npcAttack: {fileID: 0}
+  _movementView: {fileID: 4434861181799674438}
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _wallCheckDistance: 1
+  _playerCheckRadius: 5
+  _groundCheckRadius: 1
+  _playerAttackRadius: 1
+  _moveSpeed: 5
 --- !u!1 &2073725037758596147
 GameObject:
   m_ObjectHideFlags: 0

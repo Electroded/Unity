@@ -5,28 +5,18 @@ using UnityEngine;
 
 public abstract class Movement : MonoBehaviour
 {
-    [SerializeField] protected bool _isNpc = false;
     [SerializeField] protected float _moveSpeed = 5f;
     [SerializeField] protected float _jumpForce = 10f;
     [SerializeField] protected float _groundCheckRadius;
-    [SerializeField] protected Transform _groundCheck;
     [SerializeField] protected LayerMask _groundLayer;
+    [SerializeField] protected Transform _groundCheck;
+    [SerializeField] protected MovementView _movementView;
+    [SerializeField] protected Rigidbody2D _rb;
+    [SerializeField] protected Attack _attack;
 
     protected bool _isGrounded;
     protected bool _movingRight = false;
     protected float _horizontalInput;
-    protected Rigidbody2D _rb;
-    protected MovementView _movementView;
-    protected Attack _attack;
-
-    protected virtual void Start()
-    {
-        _movementView = GetComponent<MovementView>();
-
-        _attack = GetComponent<Attack>();
-
-        _rb = GetComponent<Rigidbody2D>();
-    }
 
     protected virtual void FixedUpdate()
     {

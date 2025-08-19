@@ -326,6 +326,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7069d5e058f7b1428d4e0d4a49e3a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 8681678963477890023}
+  _spriteRenderer: {fileID: 1860292317233163429}
 --- !u!114 &2201499363274917645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,14 +340,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81301c94320c5a34c99c950f3521cc5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isNpc: 0
   _moveSpeed: 5
   _jumpForce: 10
   _groundCheckRadius: 0.2
-  _groundCheck: {fileID: 8961955162192861255}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  _groundCheck: {fileID: 8961955162192861255}
+  _movementView: {fileID: 1422350082226280762}
+  _rb: {fileID: 1352382540925910594}
+  _attack: {fileID: 0}
 --- !u!114 &86278649774337440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,7 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15f166dc3804a894db25369b25861a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 0
+  _health: 10
   _healthPackLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048

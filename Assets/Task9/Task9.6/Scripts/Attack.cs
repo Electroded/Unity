@@ -1,32 +1,18 @@
 using UnityEngine;
 
-public abstract class Attack : MonoBehaviour
+public class Attack : MonoBehaviour
 {
     [SerializeField] private int _damage;
-    [SerializeField] private float _attackRadius;
+    [SerializeField] private float _attackDistance;
     [SerializeField] private float _attackCooldown;
-
+    [SerializeField] private LayerMask _layer;
     [SerializeField] private Transform _attackPoint;
-    [SerializeField] private LayerMask _enemyLayer;
+    [SerializeField] private MovementView _movementView;
 
+    private Collider2D[] results = new Collider2D[10];
     private float _nextAttackTime;
 
-    private MovementView _movementView;
-
-    private void Start()
-    {
-        _movementView = GetComponent<MovementView>();
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            PerformAttack();
-        }
-    }
-
-    public virtual void PerformAttack()
+    public void PerformAttack()
     {   
         if (Time.time >= _nextAttackTime)
         { 
@@ -34,15 +20,13 @@ public abstract class Attack : MonoBehaviour
 
             _movementView.AttackAnimation();
 
-            Collider2D[] hitInfo = Physics2D.OverlapCircleAll(_attackPoint.position, _attackRadius, _enemyLayer);
+            int count = Physics2D.OverlapCircleNonAlloc(transform.position, _attackDistance, results, _layer);
 
-            foreach (Collider2D hit in hitInfo)
+            for (int i = 0; i < count; i++)
             {
-                print(hit.name);
+                Collider2D hit = results[i];
 
-                Health health = hit.GetComponent<Health>();
-
-                if (health != null)
+                if (hit.TryGetComponent(out Health health))
                 {
                     health.ApplyDamage(_damage);
                 }
@@ -52,6 +36,6 @@ public abstract class Attack : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(_attackPoint.position, _attackRadius);
+        Gizmos.DrawWireSphere(_attackPoint.position, _attackDistance);
     }
 }

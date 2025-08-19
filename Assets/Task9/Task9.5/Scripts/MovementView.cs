@@ -9,15 +9,8 @@ public class MovementView : MonoBehaviour
     private const string Speed = "Speed";
     private const string Attack = "Attack";
 
-    private Animator _animator;
-    private SpriteRenderer _spriteRenderer;
-
-    private void Start()
-    {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-
-        _animator = GetComponent<Animator>();
-    }
+    [SerializeField] private Animator _animator;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
 
     public void SetSpeed(float horizontalInput)
     {
