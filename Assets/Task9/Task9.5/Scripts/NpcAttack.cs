@@ -24,7 +24,7 @@ public class NpcAttack : MonoBehaviour
         }
     }
 
-    private  void PerformAttack()
+    private void PerformAttack()
     {
         if (Time.time >= _nextAttackTime)
         {
