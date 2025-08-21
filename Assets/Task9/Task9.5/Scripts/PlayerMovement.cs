@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        GroundCheck();
+        CheckGround();
 
         Move();
     }
@@ -42,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
     }
+
     private void Jump()
     {
         if (_isGrounded)
@@ -50,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void GroundCheck()
+    private void CheckGround()
     {
         _isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayer);
     }

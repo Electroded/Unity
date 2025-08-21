@@ -3,18 +3,21 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int _health;
+    [SerializeField] private HealthBarUI _healthBarUI;
     [SerializeField] private LayerMask _healthPackLayerMask;
 
-    private MovementView _movementView;
+    [SerializeField] private MovementView _movementView;
 
     private void Start()
     {
-        _movementView = GetComponent<MovementView>();
+        _healthBarUI.SetHealth(_health);
     }
 
     public void ApplyDamage(int damage)
     {
         _health -= damage;
+
+        _healthBarUI.SetHealth(_health);
 
         _movementView.HitAnimation();
 
@@ -32,6 +35,8 @@ public class Health : MonoBehaviour
     private void Heal(int healthPack)
     {
         _health += healthPack;
+
+        _healthBarUI.SetHealth(_health);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

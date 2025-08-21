@@ -14,6 +14,7 @@ public class NpcMovement : MonoBehaviour
     [SerializeField] private float _playerAttackRadius;
     [SerializeField] private float _groundCheckRadius;
     [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _distanceOffset;
     [SerializeField] private Transform _patrolPointA;
     [SerializeField] private Transform _patrolPointB;
 
@@ -49,7 +50,7 @@ public class NpcMovement : MonoBehaviour
     {
         transform.position = Vector2.MoveTowards(transform.position, _patrolTarget, _moveSpeed * Time.deltaTime);
 
-        if (Vector2.Distance(transform.position, _patrolTarget) < 0.1f)
+        if (Vector2.Distance(transform.position, _patrolTarget) < _distanceOffset)
         {
             if (_patrolTarget == _patrolPointA.transform.position)
             {
