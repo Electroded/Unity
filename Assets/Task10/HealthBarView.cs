@@ -1,35 +1,26 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
-public class HealthBarUI : MonoBehaviour
+public class HealthBarView : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
     [SerializeField] private Slider _smoothSlider;
     [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private float _duration = 0.5f;
 
-    public void SetHealth(float health)
-    {
-        SetHPBar(health);
-
-        SetHPText(health);
-
-        SmoothSetHPBar(health);
-    }
-
-    private void SetHPText(float health)
-    {
-        _text.text = (health + "/" + 100f) .ToString();
-    }
-
-    private void SetHPBar(float health)
+    public void SetHPBar(float health)
     {
         _slider.value = health;
     }
 
-    private void SmoothSetHPBar(float health)
+    public void SetHPText(float health, float maxHealth)
+    {
+        _text.text = $"{health}/{maxHealth}";
+    }
+
+    public void SmoothSetHPBar(float health)
     {
         StartCoroutine(SmoothChange(health));
     }
