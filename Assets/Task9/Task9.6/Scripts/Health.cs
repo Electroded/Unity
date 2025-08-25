@@ -2,22 +2,21 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int _health;
-    [SerializeField] private HealthBarUI _healthBarUI;
+    [SerializeField] private float _health;
+    [SerializeField] private HealthBarController _healthBarController;
     [SerializeField] private LayerMask _healthPackLayerMask;
-
     [SerializeField] private MovementView _movementView;
 
     private void Start()
     {
-        _healthBarUI.SetHealth(_health);
+        _healthBarController.SetHealth(_health);
     }
 
-    public void ApplyDamage(int damage)
+    public void ApplyDamage(float damage)
     {
         _health -= damage;
 
-        _healthBarUI.SetHealth(_health);
+        _healthBarController.SetHealth(_health);
 
         _movementView.HitAnimation();
 
@@ -32,11 +31,11 @@ public class Health : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void Heal(int healthPack)
+    public void Heal(float healthPack)
     {
         _health += healthPack;
 
-        _healthBarUI.SetHealth(_health);
+        _healthBarController.SetHealth(_health);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -44,6 +43,7 @@ public class Health : MonoBehaviour
         if (((1 << collision.gameObject.layer) & _healthPackLayerMask) != 0)
         {
             Heal(collision.GetComponent<HealthPack>()._hpToHeal);
+
             Destroy(collision.gameObject);
         }
     }
