@@ -1,22 +1,22 @@
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class HealthOld : MonoBehaviour
 {
     [SerializeField] private float _health;
-    [SerializeField] private HealthBarController _healthBarController;
+    //[SerializeField] private HealthBarController _healthBarController;
     [SerializeField] private LayerMask _healthPackLayerMask;
     [SerializeField] private MovementView _movementView;
 
     private void Start()
     {
-        _healthBarController.SetHealth(_health);
+        //_healthBarController.SetHealth(_health);
     }
 
     public void ApplyDamage(float damage)
     {
         _health -= damage;
 
-        _healthBarController.SetHealth(_health);
+        //_healthBarController.SetHealth(_health);
 
         _movementView.HitAnimation();
 
@@ -35,7 +35,7 @@ public class Health : MonoBehaviour
     {
         _health += healthPack;
 
-        _healthBarController.SetHealth(_health);
+        //_healthBarController.SetHealth(_health);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    [SerializeField] private int _damage;
+    [SerializeField] private float _damage;
     [SerializeField] private float _attackDistance;
     [SerializeField] private float _attackCooldown;
     [SerializeField] private LayerMask _layer;
@@ -26,9 +26,9 @@ public class Attack : MonoBehaviour
             {
                 Collider2D hit = results[i];
 
-                if (hit.TryGetComponent(out Health health))
+                if (hit.TryGetComponent(out HealthController healthController))
                 {
-                    health.ApplyDamage(_damage);
+                    healthController.TakeDamage(_damage);
                 }
             }
         }

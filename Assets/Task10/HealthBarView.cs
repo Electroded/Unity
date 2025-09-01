@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -7,22 +6,22 @@ public class HealthBarView : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
     [SerializeField] private Slider _smoothSlider;
-    [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private float _duration = 0.5f;
 
     public void SetHPBar(float health)
     {
-        _slider.value = health;
-    }
-
-    public void SetHPText(float health, float maxHealth)
-    {
-        _text.text = $"{health}/{maxHealth}";
+        if (_slider != null)
+        {
+            _slider.value = health;
+        }
     }
 
     public void SmoothSetHPBar(float health)
     {
-        StartCoroutine(SmoothChange(health));
+        if (_smoothSlider != null)
+        {
+            StartCoroutine(SmoothChange(health));
+        }
     }
 
     private IEnumerator SmoothChange(float targetValue)
@@ -39,7 +38,6 @@ public class HealthBarView : MonoBehaviour
 
             yield return null;
         }
-
         _smoothSlider.value = targetValue;
     }
 }
