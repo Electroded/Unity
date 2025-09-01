@@ -57,7 +57,7 @@ public class VampireAttack : MonoBehaviour
 
                     healthController.TakeDamage(drain);
 
-                    _health.Heal(drain);
+                    healthController.Heal(drain);
                 }
             }
 
