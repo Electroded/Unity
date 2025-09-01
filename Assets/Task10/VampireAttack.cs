@@ -11,7 +11,6 @@ public class VampireAttack : MonoBehaviour
     [SerializeField] private float _cooldownDuration = 8f;
 
     [SerializeField] private LayerMask _enemyLayer;
-    //[SerializeField] private Image _radiusSprite;
     [SerializeField] private Slider _abilityBar;
     [SerializeField] private TextMeshProUGUI _abilityTimeText;
     [SerializeField] private Health _health;
@@ -23,8 +22,6 @@ public class VampireAttack : MonoBehaviour
 
     private void Start()
     {
-        //_radiusSprite.gameObject.SetActive(false);
-
         _abilityBar.maxValue = _abilityDuration;
 
         _abilityBar.value = _abilityDuration;
@@ -36,23 +33,6 @@ public class VampireAttack : MonoBehaviour
         {
             StartCoroutine(ActivateAbility());
         }
-        /*
-        if (isActive)
-        {
-            _abilityBar.value = timer;
-            _abilityTimeText.text = $"Drain: {timer:F1}s";
-        }
-        else if (isOnCooldown)
-        {
-            _abilityBar.value = timer;
-            _abilityTimeText.text = $"Cooldown: {timer:F1}s";
-        }
-        else
-        {
-            _abilityBar.value = _abilityDuration;
-            _abilityTimeText.text = "Ready!";
-        }
-        */
     }
 
     private IEnumerator ActivateAbility()
@@ -60,8 +40,6 @@ public class VampireAttack : MonoBehaviour
         isActive = true;
 
         timer = _abilityDuration;
-
-        //_radiusSprite.gameObject.SetActive(true);
 
         while (timer > 0)
         {
@@ -71,13 +49,13 @@ public class VampireAttack : MonoBehaviour
          
             if (enemyCol != null)
             {
-                Health health = enemyCol.GetComponent<Health>();
+                HealthController healthController = enemyCol.GetComponent<HealthController>();
 
-                if (health != null)
+                if (healthController != null)
                 {
                     float drain = _drainAmountPerSecond * Time.deltaTime;
 
-                    health.ApplyDamage(drain);
+                    healthController.TakeDamage(drain);
 
                     _health.Heal(drain);
                 }
@@ -85,9 +63,6 @@ public class VampireAttack : MonoBehaviour
 
             yield return null;
         }
-
-        //_radiusSprite.gameObject.SetActive(false);
-
         isActive = false;
 
         StartCoroutine(Cooldown());

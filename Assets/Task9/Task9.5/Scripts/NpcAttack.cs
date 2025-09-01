@@ -7,7 +7,7 @@ public class NpcAttack : MonoBehaviour
     [SerializeField] private NpcRoot _npcRoot;
     [SerializeField] private Transform _attackPoint;
     [SerializeField] private MovementView _movementView;
-    [SerializeField] private int _damage;
+    [SerializeField] private float _damage;
     [SerializeField] private float _attackCooldown = 1f;
     [SerializeField] private float _attackDistance = 1.5f;
 
@@ -38,9 +38,9 @@ public class NpcAttack : MonoBehaviour
             {
                 Collider2D hit = results[i];
 
-                if (hit.TryGetComponent(out Health health))
+                if (hit.TryGetComponent(out HealthController healthController))
                 {
-                    health.ApplyDamage(_damage);
+                    healthController.TakeDamage(_damage);
                 }
             }
         }

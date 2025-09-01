@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class MovementFB : MonoBehaviour
 {
+    [SerializeField] private float _jumpForce;
     [SerializeField] private float _rotateUpSpeed;
     [SerializeField] private float _rotateDownSpeed;
-
     [SerializeField] private float _horizontalSpeed;
-    [SerializeField] private float _jumpForce;
 
     private Rigidbody2D _rb;
 
@@ -14,6 +13,7 @@ public class MovementFB : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
     }
+
     private void FixedUpdate()
     {
         _rb.velocity = _horizontalSpeed * Time.deltaTime * Vector3.right;
@@ -29,10 +29,10 @@ public class MovementFB : MonoBehaviour
         {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, -90), _rotateDownSpeed * Time.deltaTime);
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _rb.velocity = Vector2.up * _jumpForce;
-        }
+    public void Jump()
+    {
+        _rb.velocity = Vector2.up * _jumpForce;
     }
 }
