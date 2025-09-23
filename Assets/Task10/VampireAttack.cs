@@ -13,12 +13,11 @@ public class VampireAttack : MonoBehaviour
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private Slider _abilityBar;
     [SerializeField] private TextMeshProUGUI _abilityTimeText;
-    [SerializeField] private Health _health;
+    [SerializeField] private HealthController _healthController;
 
-    private bool isActive = false;
-    private bool isOnCooldown = false;
-    private float timer = 0f;
-
+    private bool _isActive = false;
+    private bool _isOnCooldown = false;
+    private float _timer = 0f;
 
     private void Start()
     {
@@ -29,21 +28,23 @@ public class VampireAttack : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !isActive && !isOnCooldown)
+        if (Input.GetKeyDown(KeyCode.E) && !_isActive && !_isOnCooldown)
         {
             StartCoroutine(ActivateAbility());
         }
+
+        print(_isActive);
     }
 
     private IEnumerator ActivateAbility()
     {
-        isActive = true;
+        _isActive = true;
 
-        timer = _abilityDuration;
+        _timer = _abilityDuration;
 
-        while (timer > 0)
+        while (_timer > 0)
         {
-            timer -= Time.deltaTime;
+            _timer -= Time.deltaTime;
 
             Collider2D enemyCol = Physics2D.OverlapCircle(transform.position, _abilityRadius, _enemyLayer);
          
@@ -57,33 +58,33 @@ public class VampireAttack : MonoBehaviour
 
                     healthController.TakeDamage(drain);
 
-                    healthController.Heal(drain);
+                    _healthController.Heal(drain);
                 }
             }
-
             yield return null;
         }
-        isActive = false;
+        _isActive = false;
 
         StartCoroutine(Cooldown());
     }
 
     private IEnumerator Cooldown()
     {
-        isOnCooldown = true;
+        _isOnCooldown = true;
 
-        timer = 0f;
+        _timer = 0f;
 
         _abilityBar.maxValue = _cooldownDuration;
 
-        while (timer < _cooldownDuration)
+        while (_timer < _cooldownDuration)
         {
-            timer += Time.deltaTime;
+            _timer += Time.deltaTime;
+
+            _abilityBar.value = _timer;
 
             yield return null;
         }
-
-        isOnCooldown = false;
+        _isOnCooldown = false;
 
         _abilityBar.maxValue = _abilityDuration;
 
