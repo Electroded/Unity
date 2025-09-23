@@ -9,7 +9,6 @@ public class VampireAttack : MonoBehaviour
     [SerializeField] private float _drainAmountPerSecond = 10f;
     [SerializeField] private float _abilityDuration = 6f;
     [SerializeField] private float _cooldownDuration = 8f;
-
     [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private Slider _abilityBar;
     [SerializeField] private TextMeshProUGUI _abilityTimeText;
@@ -46,13 +45,11 @@ public class VampireAttack : MonoBehaviour
         {
             _timer -= Time.deltaTime;
 
-            Collider2D enemyCol = Physics2D.OverlapCircle(transform.position, _abilityRadius, _enemyLayer);
+            Collider2D enemyCollider = Physics2D.OverlapCircle(transform.position, _abilityRadius, _enemyLayer);
          
-            if (enemyCol != null)
-            {
-                HealthController healthController = enemyCol.GetComponent<HealthController>();
-
-                if (healthController != null)
+            if (enemyCollider != null)
+            {    
+                if (enemyCollider.TryGetComponent<HealthController>(out var healthController))
                 {
                     float drain = _drainAmountPerSecond * Time.deltaTime;
 
