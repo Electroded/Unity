@@ -1721,6 +1721,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8961955162192861255, guid: 80b737683bb65104e83e8b0756900fd3, type: 3}
   m_PrefabInstance: {fileID: 4123803448493769442}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1867900027 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 166012890759694269, guid: 80b737683bb65104e83e8b0756900fd3, type: 3}
+  m_PrefabInstance: {fileID: 4123803448493769442}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e2afbb5bb7d6104c844cd64f680a9fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1941186497
 GameObject:
   m_ObjectHideFlags: 0
@@ -1908,6 +1919,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 862275799463762969, guid: 80b737683bb65104e83e8b0756900fd3, type: 3}
+      propertyPath: _healthController
+      value: 
+      objectReference: {fileID: 1867900027}
     - target: {fileID: 2015910346793542234, guid: 80b737683bb65104e83e8b0756900fd3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

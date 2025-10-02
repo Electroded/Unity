@@ -31,8 +31,6 @@ public class VampireAttack : MonoBehaviour
         {
             StartCoroutine(ActivateAbility());
         }
-
-        print(_isActive);
     }
 
     private IEnumerator ActivateAbility()
@@ -45,18 +43,17 @@ public class VampireAttack : MonoBehaviour
         {
             _timer -= Time.deltaTime;
 
+            _abilityBar.value = _timer;
+
             Collider2D enemyCollider = Physics2D.OverlapCircle(transform.position, _abilityRadius, _enemyLayer);
          
-            if (enemyCollider != null)
-            {    
-                if (enemyCollider.TryGetComponent<HealthController>(out var healthController))
-                {
-                    float drain = _drainAmountPerSecond * Time.deltaTime;
+            if (enemyCollider != null && enemyCollider.TryGetComponent<HealthController>(out var enemyHealthController))
+            {
+                float drain = _drainAmountPerSecond * Time.deltaTime;
 
-                    healthController.TakeDamage(drain);
+                enemyHealthController.TakeDamage(drain);
 
-                    _healthController.Heal(drain);
-                }
+                _healthController.Heal(drain);
             }
             yield return null;
         }
@@ -68,23 +65,18 @@ public class VampireAttack : MonoBehaviour
     private IEnumerator Cooldown()
     {
         _isOnCooldown = true;
-
         _timer = 0f;
-
         _abilityBar.maxValue = _cooldownDuration;
 
         while (_timer < _cooldownDuration)
         {
             _timer += Time.deltaTime;
-
             _abilityBar.value = _timer;
-
             yield return null;
         }
         _isOnCooldown = false;
 
         _abilityBar.maxValue = _abilityDuration;
-
         _abilityBar.value = _abilityDuration;
     }
 
