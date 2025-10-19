@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Pool;
 
 [RequireComponent (typeof(ColorChanger))]
 public class CubeDestroyer : MonoBehaviour
@@ -12,16 +11,13 @@ public class CubeDestroyer : MonoBehaviour
 
     private UnityCubePool _unityCubePool;
     private ColorChanger _colorChanger;
-
     private bool _delayStarted;
-
-    public ObjectPool<GameObject> Pool;
 
     private void Start()
     {
         _unityCubePool = GameObject.FindGameObjectWithTag("UnityCubePool").GetComponent<UnityCubePool>();
+        
         _colorChanger = GetComponent<ColorChanger>();
-        print(_unityCubePool.name);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -39,7 +35,6 @@ public class CubeDestroyer : MonoBehaviour
 
     private IEnumerator ReleaseDelay()
     {
-        print("Oi");
         _delayStarted = true;
 
         float destroyTimer = Random.Range(_destroyTimerMin, _destroyTimerMax);
@@ -48,8 +43,7 @@ public class CubeDestroyer : MonoBehaviour
 
         if (_unityCubePool != null)
         {
-            //_unityCubePool.OnReturnedToPool(gameObject);
-            Pool.Release(gameObject);
+            _unityCubePool.ReleasePoolObject(gameObject);
         }
     }
 }

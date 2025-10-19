@@ -147,10 +147,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddba1c0d867a74a4987aa0ea71f6fef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 5702905193974323220}
   _targetLayer: 6
   _destroyTimerMin: 2
   _destroyTimerMax: 6
+  _renderer: {fileID: 5702905193974323220}
 --- !u!114 &4885231475995557305
 MonoBehaviour:
   m_ObjectHideFlags: 0
